@@ -3,12 +3,9 @@
 #include <stdio.h>
 #include "rle.h"
 
-// Simple RLE: output as pairs "char<count>;" stored in a malloc'd string.
-// Example: "AAAAABB\n" -> "A5B2\n" (but we append semicolon to separate rows if needed)
 char* rle_compress_seq(const char *input) {
     if (!input) return NULL;
     size_t len = strlen(input);
-    // allocate result buffer worst-case: every char encoded as c1; => 3*len
     size_t bufsize = (len * 4) + 10;
     char *out = (char*)malloc(bufsize);
     size_t pos = 0;
@@ -46,13 +43,11 @@ char* rle_decompress_seq(const char *input) {
             continue;
         }
         char c = input[i++];
-        // read number
         int count = 0;
         while (i < len && input[i] >= '0' && input[i] <= '9') {
             count = count*10 + (input[i]-'0');
             i++;
         }
-        // skip separator '|'
         if (i < len && input[i] == '|') i++;
         for (int k=0;k<count;k++) out[pos++] = c;
     }
