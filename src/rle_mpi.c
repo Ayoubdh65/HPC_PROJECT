@@ -1,7 +1,3 @@
-// For MPI RLE we will implement a simple wrapper that uses sequential functions.
-// A complete MPI version would distribute rows to processes and gather; to keep
-// the project compact and correct within limited code size we reuse sequential functions.
-
 #include "rle.h"
 #include <stdlib.h>
 
